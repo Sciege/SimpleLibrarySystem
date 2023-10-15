@@ -5,9 +5,27 @@ fun containsInvalid(username: String): Boolean {
     return regex.containsMatchIn(username)
 }
 
+// println("Want to end the program? Y/N")
+fun continueProgram(): Boolean {
+    while (true) {
+        println("Want to end the program? Y/N")
+        val options = readln()
+        val uppercase = options.uppercase()
+        return if (uppercase != "Y" && uppercase != "N") {
+            println("Please input right options")
+            continue
+        } else if (uppercase == "N") {
+            false
+        } else {
+            true
+        }
+    }
+}
+
 fun main() {
     val library = Library()
     var username: String?
+    var options: String
     val oldBooks = listOf(
         Book("The Great Gatsby", "F. Scott Fitzgerald", "12345"),
         Book("Pride and Prejudice", "Jane Austen", "978-0141439518"),
@@ -57,6 +75,11 @@ fun main() {
                         println("${index + 1}. ${book.title} by ${book.author} ${book.isbn}")
                     }
                 }
+                if (continueProgram()) {
+                    break
+                } else {
+                    continue
+                }
             }
 
             "2" -> {
@@ -70,6 +93,11 @@ fun main() {
                     foundAuthor.forEachIndexed { index, book ->
                         println("${index + 1}. ${book.author} of ${book.title}")
                     }
+                }
+                if (continueProgram()) {
+                    break
+                } else {
+                    continue
                 }
             }
 
@@ -85,6 +113,11 @@ fun main() {
                         println("${index + 1}. ${book.isbn} titled ${book.title} by ${book.author}")
                     }
                 }
+                if (continueProgram()) {
+                    break
+                } else {
+                    continue
+                }
             }
             // maghimo ug tagsa tagsa para sa (Book(title,author,isbn))
             "4" -> {
@@ -96,10 +129,20 @@ fun main() {
                 println("Enter ISBN of the book: ")
                 val addIsbn = readln()
                 library.addBook(Book(addTitle, addAuthor, addIsbn))
+                if (continueProgram()) {
+                    break
+                } else {
+                    continue
+                }
             }
 
             "5" -> {
                 library.listOfBooks()
+                if (continueProgram()) {
+                    break
+                } else {
+                    continue
+                }
             }
 
             "6" -> {
